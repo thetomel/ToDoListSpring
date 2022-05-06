@@ -15,4 +15,9 @@ public class ToDoService {
     public List<ToDo> getToDos() {
         return toDoRepository.findAll();
     }
+    public void addTask(ToDo taskToAdd){
+        toDoRepository.save(taskToAdd);
+        System.out.println("Adding "+ taskToAdd);
+    }
+
 }

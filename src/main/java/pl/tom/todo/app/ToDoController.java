@@ -1,8 +1,8 @@
 package pl.tom.todo.app;
 
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +17,12 @@ public class ToDoController {
     @GetMapping
     public List<ToDo> getToDos() {
        return toDoService.getToDos();
+    }
+    @PostMapping
+    public void addTask(@RequestBody ToDo tempToDo){
+        System.out.println(tempToDo);
+        toDoService.addTask(tempToDo);
+
     }
 
 }

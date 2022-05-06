@@ -16,7 +16,6 @@ public class ToDo {
             strategy = GenerationType.SEQUENCE,
             generator = "todo_sequence"
     )
-
     private long id;
     private String task; //Temporary [0.1v]
 
