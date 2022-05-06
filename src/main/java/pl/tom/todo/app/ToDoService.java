@@ -20,4 +20,11 @@ public class ToDoService {
         System.out.println("Adding "+ taskToAdd);
     }
 
+    public void delTask(Long taskID) {
+        boolean exists =  toDoRepository.existsById(taskID);
+        if(!exists){
+            throw new IllegalStateException("No such Task with ID:"+ taskID);
+        }
+        toDoRepository.deleteById(taskID);
+    }
 }

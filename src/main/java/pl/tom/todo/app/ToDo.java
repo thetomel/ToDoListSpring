@@ -16,7 +16,7 @@ public class ToDo {
             strategy = GenerationType.SEQUENCE,
             generator = "todo_sequence"
     )
-    private long id;
+    private long idOfTask;
     private String task; //Temporary [0.1v]
 
     public ToDo(){}
@@ -25,8 +25,8 @@ public class ToDo {
         this.task = task;
     }
 
-    public long getId() {
-        return id;
+    public long getIdOfTask() {
+        return idOfTask;
     }
 
 //    public void setId(long id) {
@@ -44,7 +44,7 @@ public class ToDo {
     @Override
     public String toString() {
         return "ToDo{" +
-                "id=" + id +
+                "id=" + idOfTask +
                 ", task='" + task + '\'' +
                 '}';
     }

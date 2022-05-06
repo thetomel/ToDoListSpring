@@ -14,14 +14,18 @@ public class ToDoController {
     public ToDoController(ToDoService toDoService) {
         this.toDoService = toDoService;
     }
-    @GetMapping
+    @GetMapping //GET ALL
     public List<ToDo> getToDos() {
        return toDoService.getToDos();
     }
-    @PostMapping
+    @PostMapping //POST
     public void addTask(@RequestBody ToDo tempToDo){
         System.out.println(tempToDo);
         toDoService.addTask(tempToDo);
+    }
+    @DeleteMapping(path="{taskID}") //DELETE HTTP
+    public void delTask(@PathVariable("taskID") Long taskID){
+        toDoService.delTask(taskID);
 
     }
 
