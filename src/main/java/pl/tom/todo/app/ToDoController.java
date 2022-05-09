@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path ="/")
+@CrossOrigin //React can connect
 public class ToDoController {
     private final ToDoService  toDoService;
 
