@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path ="/")
 public class ToDoController {
     private final ToDoService  toDoService;
 
@@ -21,7 +22,7 @@ public class ToDoController {
     //GET
     @GetMapping //GET ALL
     public List<ToDo> getToDos() {
-       return toDoService.getToDos();
+        return toDoService.getToDos();
     }
     @GetMapping(path="{taskID}") //GET BY ID
     public Optional<ToDo> getToDoByID(@PathVariable("taskID") Long taskID) {
@@ -40,7 +41,7 @@ public class ToDoController {
         toDoService.delTask(taskID);
 
     }
-    //PUT 
+    //PUT
     @PutMapping(path="{taskID}") //PUT BY ID
     public void editContentTask(
             @PathVariable("taskID") Long taskID,
