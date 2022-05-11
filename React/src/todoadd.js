@@ -28,7 +28,7 @@ const ToDoAdd = () => {
         
     return (  
         <div className="AddToDo">
-            <TextField id="addText" label="Thing To Do:" variant="standard" value={text}  onChange={(e)=>setText(e.target.value)}/>
+            <TextField id="addText" label="Thing To Do:" variant="filled" value={text}  onChange={(e)=>setText(e.target.value)}/>
             <button onClick={handleClick}>Add</button>
         </div>
     );

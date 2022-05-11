@@ -1,10 +1,21 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import DelText from './delbut';
 import EditTask from './editput';
 const GetToDo = () => {
     const [text,setText] = useState('');
     const [toDoText, setToDoText] =useState([]);
-
+    function deleteTask(e){
+         //Gets value
+        let id = e.target.value;
+        //DELTE with axios
+        axios.delete(("http://localhost:8080/del/" + id))
+        .then(() => {
+            alert("Task deleted"); //Info
+            //setToDoText(null)//Should be but crushes all to blank
+        });
+    }
+    
 
     useEffect(()=>{
         fetch('http://localhost:8080')
@@ -17,11 +28,13 @@ const GetToDo = () => {
         <div className="GetToDo">
             <p>
             {toDoText.map(task=>( 
-                <p>
-                    {/* //ID:{task.id}<br/> */}
+                <div className='Task' key={task.idOfTask}>
+                    <p>
+                    {/* ID:{task.idOfTask}<br/> */}
                     <br/>TASK:<br/>{task.task}<br></br>
-                    {/* <DelText></DelText><EditTask></EditTask> */}
+                    <button class="deleteButtons" value={task.idOfTask} /*Gives value to a button*/onClick={deleteTask}>DELETE</button>
                 </p>
+                </div>
             ))
             }
             </p>

@@ -57,7 +57,7 @@ button:hover{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10vh;
+  height: 18vh;
   width: 70vh;
 
 }
@@ -73,4 +73,11 @@ button:hover{
   height: 40%;
   text-align: center;
   vertical-align: middle;
+}
+.TextField{
+  border-style: dashed;
+}
+.deleteButtons:hover{
+  background-color: red;
+
 }
