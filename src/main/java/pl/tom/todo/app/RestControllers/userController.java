@@ -1,12 +1,11 @@
 package pl.tom.todo.app.RestControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.tom.todo.app.User;
 import pl.tom.todo.app.UserService;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
 @RestController
@@ -23,4 +22,12 @@ public class userController {
     public List<User> getUsers(){
         return userService.getUsers();
     }
-}
+    @PostMapping
+    public void postUser(@RequestBody User tempUser){
+        System.out.println("adding "+tempUser);
+        userService.postUser(tempUser);
+    }
+
+
+    }
+

@@ -1,5 +1,6 @@
 package pl.tom.todo.app;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,15 +13,19 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue()
-    private long id;
+    private long userID;
     private String name;
+    @NotNull
     private String login;
-    @OneToMany(mappedBy = "user")
+
+    @OneToMany(mappedBy = "users")
     private List<task> tasks;
+
 
     public User(String name) {
         this.name = name;
@@ -31,13 +36,4 @@ public class User {
         this.login = login;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", tasks=" + tasks +
-                '}';
-    }
 }

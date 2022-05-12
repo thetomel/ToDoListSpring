@@ -18,4 +18,7 @@ public class UserService {
     public List<User> getUsers(){
         return repository.findAll();
     }
+    public void postUser(User toPostUser){
+        repository.save(toPostUser);
+    }
 }

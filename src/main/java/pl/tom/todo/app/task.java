@@ -3,9 +3,10 @@ package pl.tom.todo.app;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "Tasks") //Create table
+@Table(name = "tasks") //Create table
 public class task {
     @Id //Here Generate ID
     @SequenceGenerator(
@@ -28,19 +29,8 @@ public class task {
     final private LocalDateTime uploadDate = LocalDateTime.now();
     private LocalDateTime lastUpdate = LocalDateTime.now();
     private LocalDateTime deadLine = null;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    @ManyToOne()
+    private User users;
 
     public task(String taskName) {
         this.taskName = taskName;
@@ -48,6 +38,22 @@ public class task {
         System.out.println("Upload" + uploadDate
         );
 
+    }
+    public task(String taskName, long id) {
+        this.taskName = taskName;
+        this.taskDescription = taskName + " description";
+        System.out.println("Upload" + uploadDate
+        );
+        users.setUserID(id);
+
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
     }
 
     public LocalDateTime getUploadDate() {
