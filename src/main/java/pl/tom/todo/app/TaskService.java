@@ -27,11 +27,12 @@ public class TaskService {
         taskRepository.save(taskToAdd);
         System.out.println("Adding "+ taskToAdd);
     }
-    public void assignTask(Long taskId, Long userId) {
-         Optional<User> user = Optional.of(userRespository.findById(userId).orElseThrow());
-        Optional<Task> assignedTask = taskRepository.findById(taskId);
-        assignedTask.setAssignedTo(user);
-    }
+
+//    public void assignTask(Long taskId, Long userId) {
+//         Optional<User> user = (userRespository.findById(userId));
+//        Optional<Task> assignedTask = taskRepository.findById(taskId);
+//        assignedTask.setAssignedTo(user);
+//    }
 
     public void delTask(Long taskID) {
         boolean exists =  taskRepository.existsById(taskID);
