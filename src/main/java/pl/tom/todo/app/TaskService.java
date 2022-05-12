@@ -28,11 +28,11 @@ public class TaskService {
         System.out.println("Adding "+ taskToAdd);
     }
 
-//    public void assignTask(Long taskId, Long userId) {
-//         Optional<User> user = (userRespository.findById(userId));
-//        Optional<Task> assignedTask = taskRepository.findById(taskId);
-//        assignedTask.setAssignedTo(user);
-//    }
+    public void assignTask(Long taskId, Long userId) {
+        User user = (userRespository.findById(userId)).orElseThrow(()->new IllegalStateException("No such user "+ userId));
+        Task assignedTask = taskRepository.findById(taskId).orElseThrow(()->new IllegalStateException("No such task "+taskId));
+        assignedTask.setAssignedTo(user);
+    }
 
     public void delTask(Long taskID) {
         boolean exists =  taskRepository.existsById(taskID);
