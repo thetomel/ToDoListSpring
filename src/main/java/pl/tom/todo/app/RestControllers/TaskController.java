@@ -2,8 +2,8 @@ package pl.tom.todo.app.RestControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.tom.todo.app.ToDoService;
-import pl.tom.todo.app.task;
+import pl.tom.todo.app.TaskService;
+import pl.tom.todo.app.Task;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,12 +11,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path ="/")
 @CrossOrigin //React can connect
-public class taskController {
-    private final ToDoService toDoService;
+public class TaskController {
+    private final TaskService taskService;
 
     @Autowired //DI - Service
-    public taskController(ToDoService toDoService) {
-        this.toDoService = toDoService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
     //
     //MAPPING SECTION
@@ -24,24 +24,24 @@ public class taskController {
 
     //GET
     @GetMapping //GET ALL
-    public List<task> getToDos() {
-        return toDoService.getToDos();
+    public List<Task> getToDos() {
+        return taskService.getToDos();
     }
     @GetMapping(path="{taskID}") //GET BY ID
-    public Optional<task> getToDoByID(@PathVariable("taskID") Long taskID) {
-        return toDoService.getToDo(taskID);
+    public Optional<Task> getToDoByID(@PathVariable("taskID") Long taskID) {
+        return taskService.getToDo(taskID);
     }
 
     //POST
     @PostMapping //POST NEW ToDo TO BASE
-    public void addTask(@RequestBody task tempToDo){
+    public void addTask(@RequestBody Task tempToDo){
         System.out.println(tempToDo);
-        toDoService.addTask(tempToDo);
+        taskService.addTask(tempToDo);
     }
     //DELETE
     @DeleteMapping(path="{taskID}") //DELETE BY ID HTTP
     public void delTask(@PathVariable("taskID") Long taskID){
-        toDoService.delTask(taskID);
+        taskService.delTask(taskID);
 
     }
     //PUT
@@ -49,7 +49,7 @@ public class taskController {
     public void editContentTask(
             @PathVariable("taskID") Long taskID,
             @RequestParam(required = true)String text){ //Required.
-        toDoService.updateTaskContent(taskID, text);
+        taskService.updateTaskContent(taskID, text);
     }
 
 

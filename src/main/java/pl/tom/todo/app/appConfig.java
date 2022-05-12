@@ -10,9 +10,9 @@ import java.util.List;
 public class appConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(taskRepository repository, UserRepository userRepository){
+    CommandLineRunner commandLineRunner(TaskRepository repository, UserRepository userRepository){
         return args -> {
-            task OneTD = new task("Some task");
+            Task OneTD = new Task("Some task");
             User User1 = new User("Name", "Login");
             User User2 = new User("Name", "Login");
             User User3 = new User("Name", "Login");

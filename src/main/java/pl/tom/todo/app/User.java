@@ -1,10 +1,7 @@
 package pl.tom.todo.app;
 
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@Data
 @ToString
 @Table(name = "users")
 public class User {
@@ -23,8 +21,8 @@ public class User {
     @NotNull
     private String login;
 
-    @OneToMany(mappedBy = "users")
-    private List<task> tasks;
+    @OneToMany(mappedBy = "assignedTo")
+    private List<Task> Tasks;
 
 
     public User(String name) {
