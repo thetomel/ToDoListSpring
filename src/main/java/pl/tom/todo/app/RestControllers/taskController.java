@@ -1,7 +1,9 @@
-package pl.tom.todo.app;
+package pl.tom.todo.app.RestControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.tom.todo.app.ToDoService;
+import pl.tom.todo.app.task;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +12,7 @@ import java.util.Optional;
 @RequestMapping(path ="/")
 @CrossOrigin //React can connect
 public class taskController {
-    private final ToDoService  toDoService;
+    private final ToDoService toDoService;
 
     @Autowired //DI - Service
     public taskController(ToDoService toDoService) {
