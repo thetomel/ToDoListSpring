@@ -10,11 +10,15 @@ import java.util.List;
 public class taskConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(ToDoRepository repository){
+    CommandLineRunner commandLineRunner(taskRepository repository, UserRepository userRepository){
         return args -> {
             task OneTD = new task("Some task");
+            User User1 = new User("Name", "Login");
             repository.saveAll(
                     List.of(OneTD)
+            );
+            userRepository.saveAll(
+                    List.of(User1)
             );
         };
     }

@@ -9,11 +9,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path ="/")
 @CrossOrigin //React can connect
-public class ToDoController {
+public class taskController {
     private final ToDoService  toDoService;
 
     @Autowired //DI - Service
-    public ToDoController(ToDoService toDoService) {
+    public taskController(ToDoService toDoService) {
         this.toDoService = toDoService;
     }
     //

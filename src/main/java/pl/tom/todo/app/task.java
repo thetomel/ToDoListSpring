@@ -30,7 +30,7 @@ public class task {
     private LocalDateTime deadLine = null;
 
     @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public User getUser() {
