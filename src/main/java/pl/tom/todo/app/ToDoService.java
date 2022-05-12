@@ -14,10 +14,10 @@ public class ToDoService {
     public ToDoService(ToDoRepository toDoRepository) {
         this.toDoRepository = toDoRepository;
     }
-    public List<ToDo> getToDos() {
+    public List<task> getToDos() {
         return toDoRepository.findAll();
     }
-    public void addTask(ToDo taskToAdd){
+    public void addTask(task taskToAdd){
         toDoRepository.save(taskToAdd);
         System.out.println("Adding "+ taskToAdd);
     }
@@ -32,12 +32,17 @@ public class ToDoService {
 
     @Transactional
     public void updateTaskContent(Long taskID, String taskContent){
-        ToDo todo = toDoRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such task")); //Find Task or Throw info "it's null" or sth like that
-        todo.setTask(taskContent);
+        task task = toDoRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such task")); //Find Task or Throw info "it's null" or sth like that
+        task.setTask(taskContent);
+    }
+    @Transactional
+    public void updateTaskName(Long taskID, String newTaskName){
+        task task = toDoRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such task")); //Find Task or Throw info "it's null" or sth like that
+        task.setTaskName(newTaskName);
     }
 
-    public Optional<ToDo> getToDo(Long taskID) { //Find Task by id
-        Optional<ToDo> toReturn = toDoRepository.findById(taskID);
+    public Optional<task> getToDo(Long taskID) { //Find Task by id
+        Optional<task> toReturn = toDoRepository.findById(taskID);
                 return toReturn;
     }
 }

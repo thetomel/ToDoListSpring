@@ -22,17 +22,17 @@ public class ToDoController {
 
     //GET
     @GetMapping //GET ALL
-    public List<ToDo> getToDos() {
+    public List<task> getToDos() {
         return toDoService.getToDos();
     }
     @GetMapping(path="{taskID}") //GET BY ID
-    public Optional<ToDo> getToDoByID(@PathVariable("taskID") Long taskID) {
+    public Optional<task> getToDoByID(@PathVariable("taskID") Long taskID) {
         return toDoService.getToDo(taskID);
     }
 
     //POST
     @PostMapping //POST NEW ToDo TO BASE
-    public void addTask(@RequestBody ToDo tempToDo){
+    public void addTask(@RequestBody task tempToDo){
         System.out.println(tempToDo);
         toDoService.addTask(tempToDo);
     }

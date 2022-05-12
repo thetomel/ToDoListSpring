@@ -7,12 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class ToDoConfig {
+public class taskConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(ToDoRepository repository){
         return args -> {
-            ToDo OneTD = new ToDo("Some task");
+            task OneTD = new task("Some task");
             repository.saveAll(
                     List.of(OneTD)
             );
