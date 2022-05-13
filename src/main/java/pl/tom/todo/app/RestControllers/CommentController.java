@@ -21,9 +21,26 @@ public class CommentController {
     public List<Comment> getComments(){
         return commentService.getComments();
     }
-@PostMapping(path = "task")
-public void postComment(@RequestBody Comment comment){
+    @PostMapping(path = "task")
+    public void postComment(@RequestBody Comment comment){
     System.out.println("adding "+comment);
     commentService.addComment(comment);
+
 }
+   @DeleteMapping(path = "/del-{commentID}")
+    public void deleteUser(@PathVariable Long commentID){
+        commentService.deleteComment(commentID);
+    }
+    @PatchMapping(path = "/comment/{commentID}")
+    public void editComment(@PathVariable Long commentID,
+                            @RequestParam String text){
+        commentService.updateComment(commentID, text);
+    }
+//    @PostMapping(path = "task/{task}/{userID}")
+//    public void postComment(@PathVariable Long userID,@RequestParam String text, @PathVariable Long task){
+//
+//        Comment comment = new Comment(text);
+//        System.out.println("adding "+comment);
+//        commentService.addComment(comment);
+//    }
 }

@@ -45,4 +45,6 @@ public class Comment {
         this.assignedToUser = assignedToUser;
         this.assignedToTask = assignedToTask;
     }
+
+
 }
