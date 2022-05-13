@@ -2,8 +2,8 @@ package pl.tom.todo.app.RestControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.tom.todo.app.TaskService;
-import pl.tom.todo.app.Task;
+import pl.tom.todo.app.Services.TaskService;
+import pl.tom.todo.app.Entities.Task;
 
 import java.util.List;
 import java.util.Optional;

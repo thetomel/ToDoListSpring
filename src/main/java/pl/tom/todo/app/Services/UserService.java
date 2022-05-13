@@ -1,9 +1,10 @@
-package pl.tom.todo.app;
+package pl.tom.todo.app.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
+import pl.tom.todo.app.Entities.User;
+import pl.tom.todo.app.Repositories.UserRepository;
 
 import java.util.List;
 import java.util.Objects;

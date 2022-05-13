@@ -1,4 +1,4 @@
-package pl.tom.todo.app.Projections;
-
-public interface UserWithTasks {
-}
+//package pl.tom.todo.app.Projections;
+//
+//public interface UserWithTasks {
+//}

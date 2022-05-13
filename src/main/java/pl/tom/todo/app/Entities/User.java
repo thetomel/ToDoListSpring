@@ -1,4 +1,4 @@
-package pl.tom.todo.app;
+package pl.tom.todo.app.Entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
@@ -23,9 +23,14 @@ public class User {
     private String name;
     @NotNull
     private String login;
-    @JsonManagedReference
+    @JsonManagedReference //Prevention from Looped JSON
     @OneToMany(mappedBy = "assignedTo")
     private List<Task> Tasks;
+
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "assignedToUser")
+    private List<Comment> comments;
 
 
     public User(String name) {

@@ -1,11 +1,12 @@
-package pl.tom.todo.app;
+package pl.tom.todo.app.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks") //Create table
@@ -31,10 +32,13 @@ public class Task {
     final private LocalDateTime uploadDate = LocalDateTime.now();
     private LocalDateTime lastUpdate = LocalDateTime.now();
     private LocalDateTime deadLine = null;
-    @JsonBackReference
+    @JsonBackReference //Prevention from Looped JSON
     @ManyToOne()
     @JoinColumn(name = "user_ID")
     private User assignedTo;
+//    @JsonManagedReference
+    @OneToMany(mappedBy = "assignedToUser")
+    private List<Comment> comments;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -59,6 +63,13 @@ public class Task {
 
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public User getAssignedTo() {
         return assignedTo;
