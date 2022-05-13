@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path ="/")
+@RequestMapping(path ="/tasks")
 @CrossOrigin //React can connect
 public class TaskController {
     private final TaskService taskService;
@@ -33,7 +33,7 @@ public class TaskController {
     }
 
 
-    @PostMapping (path = "/a/{userId}")//POST NEW ToDo TO BASE
+    @PostMapping (path = "/{userId}")//POST NEW ToDo TO BASE
     public void addTask(@RequestBody Task tempToDo,@PathVariable("userId") Long userID){
         System.out.println(tempToDo);
         taskService.addTask(tempToDo);

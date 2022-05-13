@@ -1,5 +1,6 @@
 package pl.tom.todo.app;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -22,7 +23,7 @@ public class User {
     private String name;
     @NotNull
     private String login;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "assignedTo")
     private List<Task> Tasks;
 

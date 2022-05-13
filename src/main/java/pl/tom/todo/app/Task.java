@@ -1,6 +1,8 @@
 package pl.tom.todo.app;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -29,6 +31,7 @@ public class Task {
     final private LocalDateTime uploadDate = LocalDateTime.now();
     private LocalDateTime lastUpdate = LocalDateTime.now();
     private LocalDateTime deadLine = null;
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name = "user_ID")
     private User assignedTo;

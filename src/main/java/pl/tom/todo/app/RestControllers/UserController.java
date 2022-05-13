@@ -8,7 +8,7 @@ import pl.tom.todo.app.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path= "/users")
+@RequestMapping(path= "/user")
 public class UserController {
     private final UserService userService;
 
@@ -33,7 +33,7 @@ public class UserController {
         userService.postUser(tempUser);
     }
     //Put
-    @PutMapping(path="/{UserID}/edit")
+    @PutMapping(path="/{UserID}/")
     public void updateUser(
             @PathVariable long UserId,
             @RequestParam(required = false) String name,
