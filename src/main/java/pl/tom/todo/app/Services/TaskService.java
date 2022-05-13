@@ -58,8 +58,9 @@ public class TaskService {
         task.setTaskName(newTaskName);
     }
 
-    public Optional<Task> getToDo(Long taskID) { //Find Task by id
-        Optional<Task> toReturn = taskRepository.findById(taskID);
-                return toReturn;
+    public Task getTask(Long taskID) { //Find Task by id
+         return taskRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such Task"));
     }
+
+
 }

@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Data
 @ToString
 @Table(name = "users")
 public class User {
@@ -41,5 +40,6 @@ public class User {
         this.name = name;
         this.login = login;
     }
+
 
 }

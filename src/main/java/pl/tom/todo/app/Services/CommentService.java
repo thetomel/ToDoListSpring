@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.tom.todo.app.Entities.Comment;
 import pl.tom.todo.app.Entities.Task;
+import pl.tom.todo.app.Entities.User;
 import pl.tom.todo.app.Repositories.CommentRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -26,11 +28,18 @@ public class CommentService {
     public List<Comment> getComments(){
        return commentRepository.findAll();
     }
+    public Optional<Comment> getComment(Long commentId){
+        return  commentRepository.findById(commentId);
+    }
     public void addComment(Comment comment){
         commentRepository.save(comment);
         System.out.println("Tried to save");
     }
-
+    public User findUser(Long userId){ //it shouldn't be here.
+        return userRespository.getUser(userId);
+    }public Task findTask(Long userId){ //it shouldn't be here
+        return taskRepository.getTask(userId);
+    }
     public void deleteComment(Long commentID) {
         commentRepository.findById(commentID).orElseThrow(()-> new IllegalStateException("This comment dosen't exists. NO comment with ID:"+commentID));
         commentRepository.deleteById(commentID);

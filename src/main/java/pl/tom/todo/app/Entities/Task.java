@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tasks") //Create table
-public class Task {
+public class Task{
     @Id //Here Generate ID
     @SequenceGenerator(
             name = "todo_sequence",

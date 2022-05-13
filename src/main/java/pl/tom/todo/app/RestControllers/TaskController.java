@@ -28,8 +28,8 @@ public class TaskController {
         return taskService.getToDos();
     }
     @GetMapping(path="{taskID}") //GET BY ID
-    public Optional<Task> getToDoByID(@PathVariable("taskID") Long taskID) {
-        return taskService.getToDo(taskID);
+    public Task getToDoByID(@PathVariable("taskID") Long taskID) {
+        return taskService.getTask(taskID);
     }
 
 
