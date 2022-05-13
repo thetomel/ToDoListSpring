@@ -27,10 +27,11 @@ public class TaskService {
         taskRepository.save(taskToAdd);
         System.out.println("Adding "+ taskToAdd);
     }
-
+    @Transactional
     public void assignTask(Long taskId, Long userId) {
         User user = (userRespository.findById(userId)).orElseThrow(()->new IllegalStateException("No such user "+ userId));
         Task assignedTask = taskRepository.findById(taskId).orElseThrow(()->new IllegalStateException("No such task "+taskId));
+        System.out.println("><><><"+user +" <><><> "+assignedTask);
         assignedTask.setAssignedTo(user);
     }
 

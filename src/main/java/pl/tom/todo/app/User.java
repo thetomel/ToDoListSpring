@@ -15,6 +15,8 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
+    @Column(name="USER_ID" +
+            "")
     @GeneratedValue()
     private long userID;
     private String name;

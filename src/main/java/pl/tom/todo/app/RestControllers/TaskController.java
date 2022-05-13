@@ -32,12 +32,14 @@ public class TaskController {
         return taskService.getToDo(taskID);
     }
 
-    //POST
-    @PostMapping //POST NEW ToDo TO BASE
-    public void addTask(@RequestBody Task tempToDo){
+
+    @PostMapping (path = "/a/{userId}")//POST NEW ToDo TO BASE
+    public void addTask(@RequestBody Task tempToDo,@PathVariable("userId") Long userID){
         System.out.println(tempToDo);
         taskService.addTask(tempToDo);
+        taskService.assignTask(tempToDo.getTaskID(), userID);
     }
+
     //DELETE
     @DeleteMapping(path="{taskID}") //DELETE BY ID HTTP
     public void delTask(@PathVariable("taskID") Long taskID){

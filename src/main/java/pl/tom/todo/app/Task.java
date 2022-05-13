@@ -20,7 +20,7 @@ public class Task {
     )
     private long taskID;
     private String taskName; //taskName
-    @Lob //TEXT no VARCHAR(255)
+   // @Lob //TEXT no VARCHAR(255)
     private String taskDescription; //Task Description
     private byte priority = 0;
 
@@ -30,6 +30,7 @@ public class Task {
     private LocalDateTime lastUpdate = LocalDateTime.now();
     private LocalDateTime deadLine = null;
     @ManyToOne()
+    @JoinColumn(name = "user_ID")
     private User assignedTo;
 
     public Task(String taskName) {
@@ -39,21 +40,29 @@ public class Task {
         );
 
     }
-    public Task(String taskName, long id) {
+
+    public Task(String taskName, String taskDescription) {
         this.taskName = taskName;
-        this.taskDescription = "Description" ;
-        System.out.println("Upload" + uploadDate
-        );
-        assignedTo.setUserID(id);
+        this.taskDescription = taskDescription;
+    }
+
+    public Task(String taskName, User assignedTo) {
+        this.taskName = taskName;
+        this.taskDescription = taskName + " description";
+        this.assignedTo = assignedTo;
+    }
+
+    public Task() {
 
     }
+
 
     public User getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(User users) {
-        this.assignedTo = users;
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     public LocalDateTime getUploadDate() {
@@ -98,10 +107,6 @@ public class Task {
 
     public void setDeadLine(LocalDateTime deadLine) {
         this.deadLine = deadLine;
-    }
-
-    public Task() {
-
     }
 
     public long getIdOfTask() {
