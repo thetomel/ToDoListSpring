@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/no")
+@RequestMapping(path="/comment")
 @CrossOrigin
 public class CommentController {
     private final CommentService commentService;
@@ -38,11 +38,11 @@ public class CommentController {
             System.out.println("adding "+comment);
             commentService.addComment(comment);
     }
-   @DeleteMapping(path = "/del-{commentID}")
+   @DeleteMapping(path = "/-{commentID}")
     public void deleteUser(@PathVariable Long commentID){
         commentService.deleteComment(commentID);
     }
-    @PatchMapping(path = "/comment/{commentID}")
+    @PatchMapping(path = "/{commentID}")
     public void editComment(@PathVariable Long commentID,
                             @RequestParam String text){
         commentService.updateComment(commentID, text);
