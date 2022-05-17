@@ -5,7 +5,9 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,9 +21,17 @@ public class User {
             "")
     @GeneratedValue()
     private long userID;
-    private String name;
     @NotNull
-    private String login;
+    private String password;
+    @Column(unique=true)
+    private String username;
+    private  String FirstName;
+    private  String LastName;
+    boolean enabled = false;
+    private String roles ="USER";
+
+//    @ElementCollection
+//    private Set<String> roles = new HashSet<>();
     @JsonManagedReference //Prevention from Looped JSON
     @OneToMany(mappedBy = "assignedTo")
     private List<Task> Tasks;
@@ -32,14 +42,16 @@ public class User {
     private List<Comment> comments;
 
 
-    public User(String name) {
-        this.name = name;
+    public User(String password, String username) {
+        this.password = password;
+        this.username = username;
+        this.enabled = true;
     }
-
-    public User(String name, String login) {
-        this.name = name;
-        this.login = login;
+    public User(String password, String username, String roles) {
+        this.password = password;
+        this.username = username;
+        this.enabled = true;
+        this.roles = roles;
     }
-
 
 }
