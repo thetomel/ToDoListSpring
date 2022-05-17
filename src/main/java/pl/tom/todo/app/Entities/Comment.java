@@ -30,7 +30,7 @@ public class Comment {
     @JoinColumn(name = "user_ID")
     private User assignedToUser;
 
-//    @JsonBackReference //Prevention from Looped JSON
+    @JsonBackReference //Prevention from Looped JSON
     @ManyToOne()
     @JoinColumn(name = "task_ID")
     private Task assignedToTask;

@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig /*extends WebSecurityConfigurerAdapter SomeOne said it would work, it worked.*/{
+public class SecurityConfig /*extends WebSecurityConfigurerAdapter /*SomeOne said it would work, it worked.*/{
     UserDetailsService userDetailsService;
     //@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,13 +30,17 @@ public class SecurityConfig /*extends WebSecurityConfigurerAdapter SomeOne said 
 ////                .authoritiesByUsernameQuery("SELECT U.login, R.roles FROM users AS U, user_roles AS R WHERE (R.user_user_id=U.user_id AND U.login=?)");
 //    }
 
-//    @Override
+    //@Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/users").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/").permitAll()
-                .and().formLogin();
+        http.httpBasic().and().authorizeRequests()
+//                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+//                .antMatchers(HttpMethod.POST, "/user").hasRole("ADMIN")
+//                .antMatchers("/").permitAll()
+//                .anyRequest().hasRole("ADMIN")
+//                .and().formLogin().permitAll()
+//                .and().logout().permitAll()//;
+                .antMatchers("/**").permitAll()
+                .and().csrf().disable(); //CSRF should be off after tests
     }
 
     @Bean

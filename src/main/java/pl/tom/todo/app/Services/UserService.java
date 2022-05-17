@@ -49,14 +49,20 @@ public class UserService {
         else repository.deleteById(userID);
     }
     @Transactional
-    public void updateUser(long userId, String name, String login) {
+    public void updateUser(long userId, String username, String password) {
         User user = repository.findById(userId).orElseThrow(()-> new IllegalStateException("No such user"));
-//        if((name != null) && !Objects.equals(user.getName(),name)){
-//            user.setName(name);
-//        }
-//
-//        if((login != null) && !Objects.equals(user.getLogin(),login)){
-//            user.setLogin(login);
-//        }
+        String encodedPassword = this.passwordEnocder.encode(user.getPassword());
+        if((null!=password)&&(!Objects.equals(password, user.getPassword()))){
+            user.setPassword(encodedPassword);
+        }
+        else throw  new IllegalStateException("Wrong Password - Same as last one or NULL!");
+        if((null!=username)&&(!Objects.equals(username, user.getUsername()))){
+            user.setUsername(username);
+        }
+        else throw  new IllegalStateException("Wrong Name!");
+        repository.save(user);
+
+        }
     }
-}
+
+

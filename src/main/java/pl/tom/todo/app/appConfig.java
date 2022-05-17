@@ -19,18 +19,18 @@ public class appConfig {
     CommandLineRunner commandLineRunner(TaskRepository repository, UserRepository userRepository, CommentRepository commentRepository){
         return args -> {
 
-            User User1 = new User("$2a$12$322Q75VJay4ee.mmsIwLWepPbLmiWJUAIIRKXj0tAUN.wi9U0jiIa", "Login", "ADMIN");
-            Task OneTD = new Task("Some task", User1);
-            Comment comment1 = new Comment("Ale fajna baza.", User1,OneTD);
-            userRepository.saveAll(
-                    List.of(User1)
-            );
-            repository.saveAll(
-                    List.of(OneTD)
-            );
-            commentRepository.saveAll(
-                    List.of(comment1)
-            );
+//            User User1 = new User("$2a$12$322Q75VJay4ee.mmsIwLWepPbLmiWJUAIIRKXj0tAUN.wi9U0jiIa", "Login","ADMIN");
+//            Task OneTD = new Task("Some task", User1);
+//            Comment comment1 = new Comment("Ale fajna baza.", User1,OneTD);
+//            userRepository.saveAll(
+//                    List.of(User1)
+//            );
+//            repository.saveAll(
+//                    List.of(OneTD)
+//            );
+//            commentRepository.saveAll(
+//                    List.of(comment1)
+//            );
 
         };
     }
