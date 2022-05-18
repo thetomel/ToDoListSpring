@@ -1,14 +1,17 @@
 package pl.tom.todo.app.RestControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.tom.todo.app.User;
-import pl.tom.todo.app.UserService;
+import pl.tom.todo.app.Entities.User;
+import pl.tom.todo.app.Services.UserService;
+import pl.tom.todo.app.dtos.UserDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path= "/users")
+@RequestMapping(path= "/api/user")
 public class UserController {
     private final UserService userService;
 
@@ -19,29 +22,31 @@ public class UserController {
 
     //Getters
     @GetMapping
-    public List<User> getUsers(){
-        return userService.getUsers();
+    public List<UserDTO> getUsers(){
+        return userService.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
     }
     @GetMapping("{userid}")
-    public User getUser(@PathVariable long userid){
-        return userService.getUser(userid);
+    public UserDTO getUser(@PathVariable long userid){
+        User tempuser = userService.getUser(userid);
+        return new UserDTO(tempuser);
     }
     //Post
     @PostMapping
-    public void postUser(@RequestBody User tempUser){
+    public void postUser(@RequestBody UserDTO tempUser){
         System.out.println("adding "+tempUser);
         userService.postUser(tempUser);
     }
     //Put
-    @PutMapping(path="/{UserID}/edit")
+    @PutMapping(path="/{userID}/")
     public void updateUser(
-            @PathVariable long UserId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String login
-    ){
-        userService.updateUser(UserId, name, login);
+            @PathVariable long userID,
+            @RequestBody UserDTO tempUser)
+    {
+        userService.updateUser(userID, tempUser);
     }
-
-
+    @DeleteMapping(path = "/{userID}")
+    public void deleteUser(
+            @PathVariable long userID){
+        userService.deleteUser(userID);
     }
-
+    }

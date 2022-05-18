@@ -1,13 +1,16 @@
-package pl.tom.todo.app;
+package pl.tom.todo.app.Entities;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks") //Create table
-public class Task {
+public class Task{
     @Id //Here Generate ID
     @SequenceGenerator(
             name = "todo_sequence",
@@ -20,7 +23,7 @@ public class Task {
     )
     private long taskID;
     private String taskName; //taskName
-    @Lob //TEXT no VARCHAR(255)
+   // @Lob //TEXT no VARCHAR(255)
     private String taskDescription; //Task Description
     private byte priority = 0;
 
@@ -29,8 +32,13 @@ public class Task {
     final private LocalDateTime uploadDate = LocalDateTime.now();
     private LocalDateTime lastUpdate = LocalDateTime.now();
     private LocalDateTime deadLine = null;
+    @JsonBackReference //Prevention from Looped JSON
     @ManyToOne()
+    @JoinColumn(name = "user_ID")
     private User assignedTo;
+//    @JsonManagedReference
+    @OneToMany(mappedBy = "assignedToUser")
+    private List<Comment> comments;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -39,21 +47,41 @@ public class Task {
         );
 
     }
-    public Task(String taskName, long id) {
-        this.taskName = taskName;
-        this.taskDescription = "Description" ;
-        System.out.println("Upload" + uploadDate
-        );
-        assignedTo.setUserID(id);
 
+    public Task(String taskName, String taskDescription) {
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+    }
+
+    public Task(String taskName, User assignedTo) {
+        this.taskName = taskName;
+        this.taskDescription = taskName + " description";
+        this.assignedTo = assignedTo;
+    }
+    public Task(String taskName,String taskDescription, User assignedTo) {
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.assignedTo = assignedTo;
+    }
+
+    public Task() {
+
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public User getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(User users) {
-        this.assignedTo = users;
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     public LocalDateTime getUploadDate() {
@@ -98,10 +126,6 @@ public class Task {
 
     public void setDeadLine(LocalDateTime deadLine) {
         this.deadLine = deadLine;
-    }
-
-    public Task() {
-
     }
 
     public long getIdOfTask() {
