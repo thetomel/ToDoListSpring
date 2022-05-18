@@ -7,9 +7,10 @@ import pl.tom.todo.app.Entities.Task;
 import pl.tom.todo.app.Entities.User;
 import pl.tom.todo.app.Repositories.TaskRepository;
 import pl.tom.todo.app.Repositories.UserRepository;
+import pl.tom.todo.app.dtos.TaskDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -30,6 +31,16 @@ public class TaskService {
     public void addTask(Task taskToAdd){
         taskRepository.save(taskToAdd);
         System.out.println("Adding "+ taskToAdd);
+    }
+    public void postTask(TaskDTO tempTask,Long UserID){
+        User user = (userRespository.findById(UserID)).orElseThrow(()->new IllegalStateException("No such user "+ UserID));
+        Task task = new Task(tempTask.getTaskName(), tempTask.getTaskDescription(), user);
+        task.setDeadLine(tempTask.getDeadLine());
+        task.setDone(tempTask.isDone());
+        task.setLastUpdate(LocalDateTime.now());
+
+        taskRepository.save(task);
+        System.out.println("Adding "+ task);
     }
     @Transactional
     public void assignTask(Long taskId, Long userId) {
@@ -63,4 +74,14 @@ public class TaskService {
     }
 
 
+    public void updateTask(TaskDTO temptask,long taskID) {
+        Task task = taskRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such Task"));
+        task.setTaskName(temptask.getTaskName());
+        task.setTaskDescription(temptask.getTaskDescription());
+        task.setLastUpdate(LocalDateTime.now());
+        task.setDeadLine(temptask.getDeadLine());
+        task.setDone(temptask.isDone());
+        task.setPriority(temptask.getPriority());
+        taskRepository.save(task);
+    }
 }

@@ -7,6 +7,7 @@ import pl.tom.todo.app.Entities.Comment;
 import pl.tom.todo.app.Entities.Task;
 import pl.tom.todo.app.Entities.User;
 import pl.tom.todo.app.Repositories.CommentRepository;
+import pl.tom.todo.app.dtos.CommentDTO;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,14 +16,14 @@ import java.util.Optional;
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final UserService userRespository;
+    private final UserService userRepository;
     private final TaskService taskRepository ;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, UserService userRespository,TaskService taskRepository) {
+    public CommentService(CommentRepository commentRepository, UserService userRepository, TaskService taskRepository) {
         this.commentRepository = commentRepository;
         this.taskRepository = taskRepository;
-        this.userRespository = userRespository;
+        this.userRepository = userRepository;
     }
 
     public List<Comment> getComments(){
@@ -31,12 +32,15 @@ public class CommentService {
     public Optional<Comment> getComment(Long commentId){
         return  commentRepository.findById(commentId);
     }
-    public void addComment(Comment comment){
+    public void addComment(CommentDTO commentDTO, Long userID, Long taskID){
+        User user = userRepository.getUser(userID);
+        Task task = (taskRepository.getTask(taskID));
+        Comment comment = new Comment(commentDTO.getCommentContent(), user, task);
         commentRepository.save(comment);
         System.out.println("Tried to save");
     }
     public User findUser(Long userId){ //it shouldn't be here.
-        return userRespository.getUser(userId);
+        return userRepository.getUser(userId);
     }public Task findTask(Long userId){ //it shouldn't be here
         return taskRepository.getTask(userId);
     }

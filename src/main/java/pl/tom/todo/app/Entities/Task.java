@@ -58,6 +58,11 @@ public class Task{
         this.taskDescription = taskName + " description";
         this.assignedTo = assignedTo;
     }
+    public Task(String taskName,String taskDescription, User assignedTo) {
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.assignedTo = assignedTo;
+    }
 
     public Task() {
 

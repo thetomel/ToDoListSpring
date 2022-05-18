@@ -9,9 +9,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @ToString
 @Table(name = "users")
@@ -41,6 +41,8 @@ public class User {
     @OneToMany(mappedBy = "assignedToUser")
     private List<Comment> comments;
 
+    public User() {
+    }
 
     public User(String password, String username) {
         this.password = password;
