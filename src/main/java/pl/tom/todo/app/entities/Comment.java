@@ -1,7 +1,9 @@
-package pl.tom.todo.app.Entities;
+package pl.tom.todo.app.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -25,12 +27,12 @@ public class Comment {
     @Column(name="CommentID")
     private long commentID;
     private String commentContent;
-    @JsonBackReference //Prevention from Looped JSON
+//    @JsonBackReference //Prevention from Looped JSON
     @ManyToOne()
     @JoinColumn(name = "user_ID")
     private User assignedToUser;
 
-    @JsonBackReference //Prevention from Looped JSON
+//    @JsonBackReference //Prevention from Looped JSON
     @ManyToOne()
     @JoinColumn(name = "task_ID")
     private Task assignedToTask;

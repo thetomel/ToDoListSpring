@@ -1,4 +1,4 @@
-package pl.tom.todo.app.RestControllers;
+package pl.tom.todo.app.restControllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,5 +18,9 @@ public class TestHome {
     @GetMapping("/admin")
     public String admin(){
         return ("<h1>Working only ADMINS can see</h1>");
+    }
+    @GetMapping("/test")
+    public String test(){
+        return ("<h1>No problem</h1>");
     }
 }

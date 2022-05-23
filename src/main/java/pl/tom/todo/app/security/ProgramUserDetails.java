@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.tom.todo.app.Entities.User;
+import pl.tom.todo.app.entities.User;
 
 import java.util.Arrays;
 import java.util.Collection;

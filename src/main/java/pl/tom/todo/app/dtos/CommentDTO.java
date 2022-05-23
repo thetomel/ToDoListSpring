@@ -1,7 +1,7 @@
 package pl.tom.todo.app.dtos;
 
 import lombok.Data;
-import pl.tom.todo.app.Entities.Comment;
+import pl.tom.todo.app.entities.Comment;
 
 @Data
 public class CommentDTO {

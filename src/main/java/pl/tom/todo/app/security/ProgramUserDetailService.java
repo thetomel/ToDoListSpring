@@ -5,9 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.tom.todo.app.Entities.User;
-import pl.tom.todo.app.Repositories.UserRepository;
-import pl.tom.todo.app.Services.UserService;
+import pl.tom.todo.app.entities.User;
+import pl.tom.todo.app.repositories.UserRepository;
 
 import java.util.Optional;
 

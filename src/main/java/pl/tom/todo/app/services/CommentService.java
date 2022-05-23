@@ -1,12 +1,12 @@
-package pl.tom.todo.app.Services;
+package pl.tom.todo.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.tom.todo.app.Entities.Comment;
-import pl.tom.todo.app.Entities.Task;
-import pl.tom.todo.app.Entities.User;
-import pl.tom.todo.app.Repositories.CommentRepository;
+import pl.tom.todo.app.entities.Comment;
+import pl.tom.todo.app.entities.Task;
+import pl.tom.todo.app.entities.User;
+import pl.tom.todo.app.repositories.CommentRepository;
 import pl.tom.todo.app.dtos.CommentDTO;
 
 import java.util.List;

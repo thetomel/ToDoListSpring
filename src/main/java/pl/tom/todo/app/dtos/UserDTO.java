@@ -1,7 +1,10 @@
 package pl.tom.todo.app.dtos;
 
 import lombok.Data;
-import pl.tom.todo.app.Entities.User;
+import pl.tom.todo.app.entities.Task;
+import pl.tom.todo.app.entities.User;
+
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -11,7 +14,7 @@ public class UserDTO {
     private boolean enabled;
     private String roles;
     private String password;
-//    private List<Task> tasks;
+    private List<Task> tasks;
 //    private List<Comment> comments;
 
     public  UserDTO(User user){
@@ -21,6 +24,7 @@ public class UserDTO {
         this.login=(user.getUsername());
         this.password =user.getPassword();
         this.roles=user.getRoles();
+        this.tasks=user.getTasks();
     }
     public UserDTO(){
 

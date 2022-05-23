@@ -1,7 +1,7 @@
-package pl.tom.todo.app.Repositories;
+package pl.tom.todo.app.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.tom.todo.app.Entities.User;
+import pl.tom.todo.app.entities.User;
 
 import java.util.Optional;
 

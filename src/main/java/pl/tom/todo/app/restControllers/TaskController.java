@@ -1,13 +1,12 @@
-package pl.tom.todo.app.RestControllers;
+package pl.tom.todo.app.restControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.tom.todo.app.Services.TaskService;
-import pl.tom.todo.app.Entities.Task;
+import pl.tom.todo.app.services.TaskService;
+import pl.tom.todo.app.entities.Task;
 import pl.tom.todo.app.dtos.TaskDTO;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController

@@ -1,8 +1,5 @@
-package pl.tom.todo.app.Entities;
+package pl.tom.todo.app.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,7 +29,7 @@ public class Task{
     final private LocalDateTime uploadDate = LocalDateTime.now();
     private LocalDateTime lastUpdate = LocalDateTime.now();
     private LocalDateTime deadLine = null;
-    @JsonBackReference //Prevention from Looped JSON
+//    @JsonBackReference //Prevention from Looped JSON
     @ManyToOne()
     @JoinColumn(name = "user_ID")
     private User assignedTo;

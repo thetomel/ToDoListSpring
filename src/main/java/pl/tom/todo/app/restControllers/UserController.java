@@ -1,10 +1,9 @@
-package pl.tom.todo.app.RestControllers;
+package pl.tom.todo.app.restControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.tom.todo.app.Entities.User;
-import pl.tom.todo.app.Services.UserService;
+import pl.tom.todo.app.entities.User;
+import pl.tom.todo.app.services.UserService;
 import pl.tom.todo.app.dtos.UserDTO;
 
 import java.util.List;

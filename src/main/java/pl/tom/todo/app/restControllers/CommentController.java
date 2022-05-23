@@ -1,15 +1,11 @@
-package pl.tom.todo.app.RestControllers;
+package pl.tom.todo.app.restControllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.tom.todo.app.Entities.Comment;
-import pl.tom.todo.app.Entities.Task;
-import pl.tom.todo.app.Entities.User;
-import pl.tom.todo.app.Services.CommentService;
+import pl.tom.todo.app.entities.Comment;
+import pl.tom.todo.app.services.CommentService;
 import pl.tom.todo.app.dtos.CommentDTO;
-import pl.tom.todo.app.dtos.TaskDTO;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController

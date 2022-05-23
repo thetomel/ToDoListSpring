@@ -1,8 +1,7 @@
 package pl.tom.todo.app.dtos;
 
 import lombok.Data;
-import pl.tom.todo.app.Entities.Task;
-import pl.tom.todo.app.Entities.User;
+import pl.tom.todo.app.entities.Task;
 
 import java.time.LocalDateTime;
 

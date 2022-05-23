@@ -1,13 +1,12 @@
-package pl.tom.todo.app.Entities;
+package pl.tom.todo.app.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Getter
@@ -32,12 +31,12 @@ public class User {
 
 //    @ElementCollection
 //    private Set<String> roles = new HashSet<>();
-    @JsonManagedReference //Prevention from Looped JSON
+//    @JsonManagedReference //Prevention from Looped JSON
     @OneToMany(mappedBy = "assignedTo")
     private List<Task> Tasks;
 
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "assignedToUser")
     private List<Comment> comments;
 
