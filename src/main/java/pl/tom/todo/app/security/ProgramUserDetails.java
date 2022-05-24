@@ -1,5 +1,7 @@
 package pl.tom.todo.app.security;
 
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -11,6 +13,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@ToString
 public class ProgramUserDetails implements UserDetails {
 
     private String password;

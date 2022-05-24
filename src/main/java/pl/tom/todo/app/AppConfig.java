@@ -20,7 +20,7 @@ public class AppConfig {
         return args -> {
 
             User User1 = new User("$2a$12$322Q75VJay4ee.mmsIwLWepPbLmiWJUAIIRKXj0tAUN.wi9U0jiIa", "Login","ADMIN");
-            User User2 = new User("qwerty", "admin","ADMIN");
+            User User2 = new User("$2a$12$sQHdPfBL/paku.6O6oJQ3.7Gu7K7v/WKDtGzAYOSjuFcUmtkod8j6","user", "USER");
             Task OneTD = new Task("Some task", User1);
             Comment comment1 = new Comment("Ale fajna baza.", User1,OneTD);
             userRepository.saveAll(

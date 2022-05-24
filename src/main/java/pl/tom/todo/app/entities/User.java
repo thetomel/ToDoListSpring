@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import pl.tom.todo.app.security.ProgramUserDetails;
 
 import javax.persistence.*;
 import java.util.List;
@@ -41,6 +42,15 @@ public class User {
     private List<Comment> comments;
 
     public User() {
+    }
+    public User(ProgramUserDetails programUserDetails){
+        this.username = programUserDetails.getUsername();
+        this.password = programUserDetails.getPassword();
+        this.FirstName = programUserDetails.getFirstName();
+        this.LastName = programUserDetails.getLastName();
+        this.roles =  programUserDetails.getAuthorities().toString().substring(1, programUserDetails.getAuthorities().toString().length() - 1);
+        System.out.println(roles);
+        this.enabled = programUserDetails.isEnabled();
     }
 
     public User(String password, String username) {
