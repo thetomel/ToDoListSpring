@@ -2,9 +2,10 @@ package pl.tom.todo.app.restControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.tom.todo.app.CurrentUser;
+import pl.tom.todo.app.dtos.UserDTO;
 import pl.tom.todo.app.entities.User;
 import pl.tom.todo.app.services.UserService;
-import pl.tom.todo.app.dtos.UserDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,10 @@ public class UserController {
     @GetMapping
     public List<UserDTO> getUsers(){
         return userService.getUsers().stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+    @GetMapping(path="/c")
+    public UserDTO getUserCurrent() {
+        return  new UserDTO(userService.findUser(new CurrentUser().getCurrentUserName()));
     }
     @GetMapping("{userid}")
     public UserDTO getUser(@PathVariable long userid){

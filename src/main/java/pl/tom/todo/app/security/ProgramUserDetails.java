@@ -16,14 +16,12 @@ import java.util.stream.Collectors;
 @Getter
 @ToString
 public class ProgramUserDetails implements UserDetails {
-
     private String password;
     private String username;
     private  String FirstName;
     private  String LastName;
     boolean enabled;
     private List<GrantedAuthority> authorities;
-
     public ProgramUserDetails(User user) {
         password=user.getPassword();
         username=user.getUsername();
@@ -32,38 +30,30 @@ public class ProgramUserDetails implements UserDetails {
         enabled= user.isEnabled();
         authorities = Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
-
     @Override
     public String getPassword() {
         return password;
     }
-
     @Override
     public String getUsername() {
         return username;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return enabled;

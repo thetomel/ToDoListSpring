@@ -1,5 +1,6 @@
 import { TextField } from '@react-ui-org/react-ui';
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 const ToDoAdd = () => {
     const [text,setText] = useState('');
@@ -19,7 +20,7 @@ const ToDoAdd = () => {
     }
 
     useEffect(()=>{
-        fetch('http://localhost:8080')
+        fetch('http://localhost:8080/tasks')
         .then(res=>res.json())
         .then((result)=>{
             setToDoText(result)})

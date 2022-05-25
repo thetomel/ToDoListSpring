@@ -5,7 +5,7 @@ import pl.tom.todo.app.entities.User;
 
 @Data
 public class UserDTO {
-    private String login;
+    private String username;
     private String firstName;
     private String lastName;
     private boolean enabled;
@@ -18,7 +18,7 @@ public class UserDTO {
         this.enabled=(user.isEnabled());
         this.firstName =user.getFirstName();
         this.lastName =user.getLastName();
-        this.login=(user.getUsername());
+        this.username =(user.getUsername());
         this.password =user.getPassword();
         this.roles=user.getRoles();
         //this.tasks=user.getTasks();

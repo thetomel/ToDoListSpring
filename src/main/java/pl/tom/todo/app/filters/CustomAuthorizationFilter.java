@@ -38,16 +38,11 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     String username = decodedJWT.getSubject();
                     String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                    System.out.println(roles);
                     stream(roles).forEach( role ->{
                         authorities.add(new SimpleGrantedAuthority(role));
                     });
-//                    authorities.add(new SimpleGrantedAuthority("ADMIN"));
-                    System.out.println("18");
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
-                    System.out.println("19");
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                    System.out.println("10");
                     filterChain.doFilter(request, response);
                 } catch (Exception exception) {
 //                    response.setHeader("ERORR", exception.getMessage());
@@ -56,7 +51,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 //                    error.put("error_messeage", exception.getMessage());
 //                    response.setContentType(APPLICATION_JSON_VALUE);
 //                    new ObjectMapper().writeValue(response.getOutputStream(), error);
-                    throw new JWTDecodeException("Wrong JWT or JWT can not be decoded");
+                    throw new JWTDecodeException("Wrong JWT or JWT can not be decoded " + exception.getMessage());
                 }
             }
             else {

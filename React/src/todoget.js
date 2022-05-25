@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import React from 'react';
 import DelText from './delbut';
 import EditTask from './editput';
 const GetToDo = () => {
@@ -12,13 +13,13 @@ const GetToDo = () => {
         axios.delete(("http://localhost:8080/del/" + id))
         .then(() => {
             alert("Task deleted"); //Info
-            //setToDoText(null)//Should be but crushes all to blank
+            setToDoText(null)//Should be but crushes all to blank
         });
     }
     
 
     useEffect(()=>{
-        fetch('http://localhost:8080')
+        fetch('http://localhost:8080/tasks')
         .then(res=>res.json())
         .then((result)=>{
             setToDoText(result)})
@@ -28,7 +29,7 @@ const GetToDo = () => {
         <div className="GetToDo">
             <p>
             {toDoText.map(task=>( 
-                <div className='Task' key={task.idOfTask}>
+                <div className='Task' key={task.task_name}>
                     <p>
                     {/* ID:{task.idOfTask}<br/> */}
                     <br/>TASK:<br/>{task.task}<br></br>

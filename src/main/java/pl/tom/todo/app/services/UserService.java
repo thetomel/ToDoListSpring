@@ -5,9 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.tom.todo.app.dtos.UserDTO;
 import pl.tom.todo.app.entities.User;
 import pl.tom.todo.app.repositories.UserRepository;
-import pl.tom.todo.app.dtos.UserDTO;
 
 import java.util.List;
 
@@ -41,13 +41,16 @@ public class UserService {
     public User getUser(long id) {
         return repository.findById(id).orElseThrow(()-> new IllegalStateException("No such user"));
     }
+    public User findUser(String username){
+        return repository.findByUsername(username).orElseThrow(()-> new IllegalStateException("No such user"));
+    }
 
     public void postUser(UserDTO tempUser) {
         User user = new User();
-        if(repository.existsByUsername(tempUser.getLogin())&&(null!=tempUser.getLogin())){
+        if(repository.existsByUsername(tempUser.getUsername())&&(null!=tempUser.getUsername())){
             throw  new IllegalStateException("Name is already taken or ist empty.");
         }
-        else user.setUsername(tempUser.getLogin());
+        else user.setUsername(tempUser.getUsername());
        user.setFirstName(tempUser.getFirstName());
        user.setLastName(tempUser.getLastName());
        user.setPassword(this.passwordEnocder.encode(tempUser.getPassword()));
@@ -86,12 +89,12 @@ public class UserService {
     public void updateUser(long id, UserDTO tempUser){ // ID or username better?
         User user = repository.findById(id).orElseThrow(()-> new IllegalStateException("No such user"));
 
-        if(repository.existsByUsername(tempUser.getLogin())&&(null!=tempUser.getLogin())){
+        if(repository.existsByUsername(tempUser.getUsername())&&(null!=tempUser.getUsername())){
             throw  new IllegalStateException("It's your actual username.");
-        } else  user.setUsername(tempUser.getLogin());
+        } else  user.setUsername(tempUser.getUsername());
         if(user.getPassword() == tempUser.getPassword()&&(null!=tempUser.getPassword())){
             throw  new IllegalStateException("It's your actual password or it's empty.");
-        } else  user.setUsername(tempUser.getLogin());
+        } else  user.setUsername(tempUser.getUsername());
         user.setFirstName(tempUser.getFirstName());
         user.setLastName(tempUser.getLastName());
         user.setPassword(tempUser.getPassword());
