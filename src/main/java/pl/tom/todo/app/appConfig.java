@@ -10,7 +10,9 @@ import pl.tom.todo.app.Repositories.CommentRepository;
 import pl.tom.todo.app.Repositories.TaskRepository;
 import pl.tom.todo.app.Repositories.UserRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class appConfig {
@@ -19,10 +21,10 @@ public class appConfig {
     CommandLineRunner commandLineRunner(TaskRepository repository, UserRepository userRepository, CommentRepository commentRepository){
         return args -> {
 
-            User User1 = new User("Name", "Login");
+            User User1 = new User("1","1");
             Task OneTD = new Task("Some task", User1);
-            User User2 = new User("Name", "Login");
-            User User3 = new User("Name", "Login");
+            User User2 = new User("password", "password");
+            User User3 = new User("user","user");
             Comment comment1 = new Comment("Ale fajna baza.", User2,OneTD);
             userRepository.saveAll(
                     List.of(User1, User2, User3)

@@ -36,10 +36,8 @@ public class UserController {
     @PutMapping(path="/{UserID}/")
     public void updateUser(
             @PathVariable long UserId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String login
-    ){
-        userService.updateUser(UserId, name, login);
+            @RequestParam(required = false) String Username){
+        userService.updateUser(UserId, Username);
     }
     @DeleteMapping(path = "/{userID}")
     public void deleteUser(

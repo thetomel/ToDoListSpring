@@ -36,14 +36,14 @@ public class UserService {
         else repository.deleteById(userID);
     }
     @Transactional
-    public void updateUser(long userId, String name, String login) {
+    public void updateUser(long userId, String Username) {
         User user = repository.findById(userId).orElseThrow(()-> new IllegalStateException("No such user"));
-        if((name != null) && !Objects.equals(user.getName(),name)){
-            user.setName(name);
-        }
+//        if((Username != null) && !Objects.equals(user.getLogin(),Username)){
+//            user.setLogin(Username);
+//        }
 
-        if((login != null) && !Objects.equals(user.getLogin(),login)){
-            user.setLogin(login);
-        }
+//        if((login != null) && !Objects.equals(user.getLogin(),login)){
+//            user.setLogin(login);
+//        }
     }
 }
