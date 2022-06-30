@@ -1,14 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom";
 import './index.css';
 import App from './App';
-import { TextField } from '@react-ui-org/react-ui';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './components/login';
+import NoPage from './components/NoPage';
+import Home from './Home';
+import TaskListMain from './TaskListMain';
+import { AuthProvider } from './context/AuthProvider';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <AuthProvider>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App/>}>
+        <Route path="/" element={<Home/>}/>
+        <Route path="tasks" element={<TaskListMain/>}/>
+        <Route path="login" element={<Login/>}/>
+        <Route path="/*" element={<NoPage/>}/>
+      </Route>
+      </Routes>
+    </BrowserRouter>
+    </AuthProvider>
+    
+     
+ 
 );
 
 // If you want to start measuring performance in your app, pass a function

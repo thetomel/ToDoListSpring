@@ -32,8 +32,11 @@
 .navbar a:hover {
   color: #0049cf;
 }
-.content {
+.content{
+  display: flex;
+  justify-content: center;
   max-width: 900px;
+  background-color: aliceblue;
   margin: 40px auto;
   padding: 20px;
 }
@@ -47,18 +50,17 @@ button:hover{
   background-color: #0049cf;
   color:whitesmoke;
 }
-.GetToDo{
+.ToDo{
   display: flex;
   width: 70%;
   padding: 2px;
   margin: 2px;
 }
-.AddToDo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 18vh;
-  width: 70vh;
+.task-form{
+  height: 7vh;
+  width: auto;
+  border: 2px dashed rgba(28,110,164,0.4);
+  border-radius: 0px 6px 0px 6px;
 
 }
 .AddToDo > *{
@@ -81,3 +83,35 @@ button:hover{
   background-color: red;
 
 }
+.login-page{
+  width: 120vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.login-page > *{
+  padding: 1%;
+}
+.err-msg{
+  background-color:  #ff4d4d;
+  color: white;
+  visibility: visible;
+}
+.err-msg-off{
+  visibility: hidden;
+}
+.task-done h3{
+  text-decoration: line-through;
+  color:#666
+}
+.task, .task-done {
+  padding: 2px;
+  display: flex;
+  
+}
+.task > *, .task-done > *{
+  padding: 5px;
+  display: flex;
+}
+

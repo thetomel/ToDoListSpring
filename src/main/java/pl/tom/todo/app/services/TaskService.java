@@ -7,20 +7,24 @@ import pl.tom.todo.app.CurrentUser;
 import pl.tom.todo.app.dtos.TaskDTO;
 import pl.tom.todo.app.entities.Task;
 import pl.tom.todo.app.entities.User;
+import pl.tom.todo.app.repositories.CommentRepository;
 import pl.tom.todo.app.repositories.TaskRepository;
 import pl.tom.todo.app.repositories.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRespository;
+    private final CommentRepository commentRepository;
     @Autowired
-    public TaskService(TaskRepository taskRepository, UserRepository userRespository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRespository, CommentRepository commentRepository) {
         this.taskRepository = taskRepository;
         this.userRespository = userRespository;
+        this.commentRepository = commentRepository;
     }
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
@@ -31,6 +35,7 @@ public class TaskService {
     public void postTask(TaskDTO tempTask,String username){
         User user = (userRespository.findByUsername(username)).orElseThrow(()->new IllegalStateException("No such user "+ username));
         Task task = new Task(tempTask.getTaskName(), tempTask.getTaskDescription(), user);
+        task.setPriority(tempTask.getPriority());
         task.setDeadLine(tempTask.getDeadLine());
         task.setDone(tempTask.isDone());
         task.setLastUpdate(LocalDateTime.now());
@@ -44,13 +49,17 @@ public class TaskService {
         System.out.println("><><><"+user +" <><><> "+assignedTask);
         assignedTask.setAssignedTo(user);
     }
+    @Transactional
     public void delTask(Long taskID) {
         boolean exists =  taskRepository.existsById(taskID);
         if(!exists){
             throw new IllegalStateException("No such Task with ID:"+ taskID);
         }
+        Task task = taskRepository.findById(taskID).orElseThrow(()->new IllegalStateException("No such task"));
+        commentRepository.deleteAllByAssignedToTask(Optional.ofNullable(task));
         taskRepository.deleteById(taskID);
     }
+    @Transactional
     public void delTaskAsk(Long taskID) {
         boolean exists =  taskRepository.existsById(taskID);
         if(!exists){
@@ -59,6 +68,8 @@ public class TaskService {
         boolean exists2 = taskRepository.findAllByAssignedTo_UsernameEquals(new CurrentUser().getCurrentUserName()).contains(taskRepository.existsById(taskID));
         if(!exists2)
         {
+            Task task = taskRepository.findById(taskID).orElseThrow(()->new IllegalStateException("No such task"));
+            commentRepository.deleteAllByAssignedToTask(Optional.ofNullable(task));
             taskRepository.deleteById(taskID);
         }
         throw new ArithmeticException("You don't have permission for this action");// IllegalStateException("No such Task with ID:"+ taskID);
@@ -77,6 +88,7 @@ public class TaskService {
     public Task getTask(Long taskID) { //Find Task by id
          return taskRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such Task"));
     }
+    @Transactional
     public void updateTask(TaskDTO temptask,long taskID) {
         Task task = taskRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such Task"));
         task.setTaskName(temptask.getTaskName());
@@ -85,6 +97,12 @@ public class TaskService {
         task.setDeadLine(temptask.getDeadLine());
         task.setDone(temptask.isDone());
         task.setPriority(temptask.getPriority());
+        taskRepository.save(task);
+    }
+    @Transactional
+    public void updateState(long taskID) {
+        Task task = taskRepository.findById(taskID).orElseThrow(()-> new IllegalStateException("No such Task"));
+        task.setDone(!task.isDone());
         taskRepository.save(task);
     }
 }

@@ -22,7 +22,7 @@ public class Task{
     private String taskName; //taskName
    // @Lob //TEXT no VARCHAR(255)
     private String taskDescription; //Task Description
-    private byte priority = 0;
+    private int priority = 0;
 
     //private long UserID;
     private boolean isDone = false;
@@ -101,11 +101,11 @@ public class Task{
         this.taskDescription = taskDescription;
     }
 
-    public byte getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(byte priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 

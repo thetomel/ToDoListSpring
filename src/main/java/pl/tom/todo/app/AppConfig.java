@@ -23,6 +23,7 @@ public class AppConfig {
             User User2 = new User("$2a$12$sQHdPfBL/paku.6O6oJQ3.7Gu7K7v/WKDtGzAYOSjuFcUmtkod8j6","user", "USER");
             Task OneTD = new Task("Some task", User1);
             Task TwoTD = new Task("UserOfTwo", User2);
+            Task td3 = new Task("UserOfTwo", User2);
             Comment comment1 = new Comment("Ale fajna baza.", User1,OneTD);
             userRepository.saveAll(
                     List.of(User1, User2)

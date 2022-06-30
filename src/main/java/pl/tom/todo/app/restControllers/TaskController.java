@@ -1,7 +1,6 @@
 package pl.tom.todo.app.restControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.tom.todo.app.CurrentUser;
 import pl.tom.todo.app.dtos.TaskDTO;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path ="/tasks")
-@CrossOrigin //React can connect
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*") //React can connect
 public class TaskController {
     private final TaskService taskService;
     @Autowired //DI - Service
@@ -40,11 +39,14 @@ public class TaskController {
     public void postTask(@RequestBody TaskDTO taskDTO){
         System.out.println(taskDTO);
         String username = new CurrentUser().getCurrentUserName();
+        if(username.isEmpty() || username.equals("anonymousUser")){
+            username = "admin";
+        }
         taskService.postTask(taskDTO, username);
     }
     //DELETE
     @DeleteMapping(path="{taskID}") //DELETE BY ID HTTP
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public void delTask(@PathVariable("taskID") Long taskID){
         taskService.delTask(taskID);
     }
@@ -64,5 +66,9 @@ public class TaskController {
     public void patchTask(@PathVariable("taskID") Long taskID,
                           @RequestBody TaskDTO taskDTO){
         taskService.updateTask(taskDTO, taskID);
+    }
+    @PatchMapping(path="/{taskID}/state")
+    public void patchTask(@PathVariable("taskID") Long taskID){
+        taskService.updateState(taskID);
     }
 }

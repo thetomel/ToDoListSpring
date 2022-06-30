@@ -53,7 +53,8 @@ public class UserService {
         else user.setUsername(tempUser.getUsername());
        user.setFirstName(tempUser.getFirstName());
        user.setLastName(tempUser.getLastName());
-       user.setPassword(this.passwordEnocder.encode(tempUser.getPassword()));
+//       user.setPassword(this.passwordEnocder.encode(tempUser.getPassword()));
+       user.setPassword(tempUser.getPassword());
        user.setEnabled(tempUser.isEnabled());
         user.setRoles((tempUser.getRoles()==null)?"USER":tempUser.getRoles()) ;
        repository.save(user);

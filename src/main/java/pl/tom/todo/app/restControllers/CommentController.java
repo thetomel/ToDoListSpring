@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path="/comment")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommentController {
     private final CommentService commentService;
     public CommentController(CommentService commentService) {
